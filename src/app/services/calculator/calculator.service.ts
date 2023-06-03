@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { LoggerService } from '../logger/logger.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalculatorService {
+  constructor(private loggerService: LoggerService) {}
 
-  constructor(private loggerService:LoggerService) {}
-  
- add(number1:number,number2:number) {
-  let result =  number1 + number2;
-  this.loggerService.log(`Add action is preformed with result ${result}`);
-  return result;
-  
-}
+  add(n1: number, n2: number) {
+    let result = n1 + n2;
+    this.loggerService.log('Add Operation is called');
+    return result;
+  }
 
-subtract(number1:number,number2:number) { 
-  let result = number1 - number2;
-  this.loggerService.log(`Subtract action is preformed with result ${result}`);
-  return result;
- }
+  subtract(n1: number, n2: number) {
+    let result = n1 - n2;
+    this.loggerService.log('Subtract Operation is called');
+    return result;
+  }
 }

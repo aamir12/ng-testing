@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StrengthPipe } from './pipes/Strength/strength.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './components/posts/posts.component';
+import { PostComponent } from './components/post/post/post.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { PostsComponent } from './components/posts/posts.component';
     AppComponent,
     StrengthPipe,
     PostsComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
