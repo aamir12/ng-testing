@@ -3,9 +3,10 @@ import { of } from 'rxjs';
 import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/Post/post.service';
 import { PostsComponent } from './posts.component';
-import { Component, Input } from '@angular/core';
+import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { PostComponent } from '../post/post/post.component';
+import { PostComponent } from '../post/post.component';
+
 
 // class MockPostService {
 //   getPosts() {}
@@ -52,6 +53,7 @@ describe('Posts Component', () => {
 
     TestBed.configureTestingModule({
       declarations:[PostsComponent,PostComponent],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         {
           provide: PostService,
@@ -119,5 +121,34 @@ describe('Posts Component', () => {
       component.delete(POSTS[1]);
       expect(mockPostService.deletePost).toHaveBeenCalledTimes(1);
     });
+
+    it('should call the delete method in post component button is clicked', () => {
+      mockPostService.getPosts.and.returnValue(of(POSTS));
+      fixture.detectChanges();
+
+      spyOn(component,'delete')
+      const postComponentDEs = fixture.debugElement.queryAll(By.directive(PostComponent));
+      for (let index = 0; index < postComponentDEs.length; index++) {
+        postComponentDEs[index].query(By.css('button')).triggerEventHandler('click',{preventDefault: () => {}});
+        expect(component.delete).toHaveBeenCalledWith(POSTS[index]);
+      }
+
+    });
+
+
+    it('should call the delete method in post component delete event emitter emit', () => {
+      mockPostService.getPosts.and.returnValue(of(POSTS));
+      fixture.detectChanges();
+
+      spyOn(component,'delete')
+      const postComponentDEs = fixture.debugElement.queryAll(By.directive(PostComponent));
+      for (let index = 0; index < postComponentDEs.length; index++) {
+        (postComponentDEs[index].componentInstance as PostComponent).delete.emit(POSTS[index]);
+        expect(component.delete).toHaveBeenCalledWith(POSTS[index]);
+      }
+
+    });
+
+    
   });
 });

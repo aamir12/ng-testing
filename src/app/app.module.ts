@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { StrengthPipe } from './pipes/Strength/strength.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './components/posts/posts.component';
-import { PostComponent } from './components/post/post/post.component';
+import { PostComponent } from './components/post/post.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,10 +17,12 @@ import { PostComponent } from './components/post/post/post.component';
     StrengthPipe,
     PostsComponent,
     PostComponent,
+    PostDetailComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule,
   ],
   providers: [],
